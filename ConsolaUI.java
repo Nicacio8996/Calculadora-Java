@@ -21,15 +21,28 @@ public class ConsolaUI {
                             );
      }
 
-    public static int leerOpcion(Scanner teclado){
-        return teclado.nextInt();
-
+    public static int leerOpcion(Scanner teclado) {
+    while (true) {
+        if (teclado.hasNextInt()) {
+            return teclado.nextInt();
+        }
+        mostrarMensaje("Error...\n" +
+                       "Ingresa un número de opción válido...");
+        teclado.next();
     }
+ }
 
-    public static double leerNumero(Scanner teclado, String mensaje){
-        ConsolaUI.mostrarMensaje(mensaje);
-        return teclado.nextDouble();
+    public static double leerNumero(Scanner teclado, String mensaje) {
+    while (true) {
+        mostrarMensaje(mensaje);
+        if (teclado.hasNextDouble()) {
+            return teclado.nextDouble();
+        }
+        mostrarMensaje("Error...\n" +
+                       "Ingresa un número válido...");
+        teclado.next();
     }
+}
 
 
     public static double[] leerDosNumeros(Scanner teclado){
