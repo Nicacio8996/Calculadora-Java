@@ -8,8 +8,6 @@ public class SumaResta {
     // Funcion main obligatorio
     public static void main(String args[]) {
         // inicialisamos las variables
-        double num1;
-        double num2;
         double sum1;
         double res1;
         double mult;
@@ -23,102 +21,71 @@ public class SumaResta {
         Scanner datos = new Scanner(System.in);
 
         while (opcion != 7) {
-            System.out.println();
-            // Pedimos los datos al Usuario
-            System.out.println("----- CALCULADORA -----");
-            System.out.println();
+            ConsolaUI.mostrarMenu();
+            opcion = ConsolaUI.leerOpcion(datos);
+            
 
-            System.out.println();
-            System.out.println("Elige una opcion...");
-            System.out.println();
-            System.out.println("1. Para sumar\n" +
-                    "2. Para restar\n" +
-                    "3. Para Multiplicar\n" +
-                    "4. Para dividir\n" +
-                    "5. Para Potencia\n" +
-                    "6. Raiz Cuadrada\n" +
-                    "7. Para salir");
+            
+           
 
-            System.out.println();
-            opcion = datos.nextInt();
+            
 
             if (opcion == 1) {
-                System.out.println("Ingresa el primer Número: ");
-                num1 = datos.nextDouble();
+                double[] numeros = ConsolaUI.leerDosNumeros(datos);
+                sum1 = Operaciones.sumar(numeros[0], numeros[1]);
+                ConsolaUI.mostrarMensaje("La suma es: " + sum1);
 
-                System.out.println("Ingresa el segundo numero: ");
-                num2 = datos.nextDouble();
-                sum1 = Operaciones.sumar(num1, num2);
-                System.out.println("La suma es: " + sum1);
 
             } else if (opcion == 2) {
-                System.out.println("Ingresa el primer Número: ");
-                num1 = datos.nextDouble();
+                double[] numeros = ConsolaUI.leerDosNumeros(datos);
+                res1 = Operaciones.restar(numeros[0], numeros[1]);
+                ConsolaUI.mostrarMensaje("La resta es: " + res1);
 
-                System.out.println("Ingresa el segundo numero: ");
-                num2 = datos.nextDouble();
-                res1 = Operaciones.restar(num1, num2);
-                System.out.println("La Resta es: " + res1);
 
             } else if (opcion == 3) {
-                System.out.println("Ingresa el primer Número: ");
-                num1 = datos.nextDouble();
-
-                System.out.println("Ingresa el segundo numero: ");
-                num2 = datos.nextDouble();
-                mult = Operaciones.multiplicar(num1, num2);
-                System.out.println("La mltiplicacion es:" + mult);
-
+                double[] numeros = ConsolaUI.leerDosNumeros(datos);
+                mult = Operaciones.multiplicar(numeros[0], numeros[1]);
+                ConsolaUI.mostrarMensaje("La multiplicación es: " + mult);
+                
             } else if (opcion == 4) {
-                System.out.println("Ingresa el primer Número: ");
-                num1 = datos.nextDouble();
-
-                System.out.println("Ingresa el segundo numero: ");
-                num2 = datos.nextDouble();
-                if (num2 != 0) {
-                    div = Operaciones.divicion(num1, num2);
-                    System.out.println("La divicion es:" + div);
+                double[] numeros = ConsolaUI.leerDosNumeros(datos);
+                if (numeros[1] != 0) {
+                    div = Operaciones.divicion(numeros[0], numeros[1]);
+                    ConsolaUI.mostrarMensaje("La divicion es: " + div);
                 } else {
-                    System.out.println("Error...");
-                    System.out.println("No se puede dividir por cero... ");
-                    System.out.println("Intente Nuevamente...");
-
+                    ConsolaUI.mostrarMensaje("Error...");
+                    ConsolaUI.mostrarMensaje("No se puede dividir por cero... ");
+                    ConsolaUI.mostrarMensaje("Intente Nuevamente...");
                 }
 
-            } else if (opcion == 5) {
-                System.out.println("Ingresa el primer Número: ");
-                num1 = datos.nextDouble();
+            }else if (opcion == 5){
+                double [] numeros = ConsolaUI.leerDosNumeros(datos);
+                Potencia = Operaciones.potencia(numeros[0], numeros[1]);
+                ConsolaUI.mostrarMensaje("La Potencia es: " + Potencia);
 
-                System.out.println("Ingresa el segundo numero: ");
-                num2 = datos.nextDouble();
-                Potencia = Operaciones.potencia(num1, num2);
-                System.out.println("La Potencia es: " + Potencia);
-
+        
             } else if (opcion == 6) {
-                System.out.println("Ingresa un  Numero: ");
-                numRaiz = datos.nextDouble();
+                numRaiz = ConsolaUI.leerNumero(datos, "Ingresa un número: ");
                 if (numRaiz < 0) {
-                    System.out.println("Error...");
-                    System.out.println("Numero no valido...");
-                    System.out.println("En numero no debe de ser negativo...");
+                ConsolaUI.mostrarMensaje("Error...\n" +
+                                         "Número no válido...\n" +
+                                         "El número no debe ser negativo...\n" +
+                                         "Intente Nuevamente...");
                 } else {
-                    raiz = Operaciones.raizCuadrada(numRaiz);
-                    System.out.println("La Raiz cuadrada de " + numRaiz + " es: " + raiz);
-
+                       raiz = Operaciones.raizCuadrada(numRaiz);
+                        ConsolaUI.mostrarMensaje("La raíz cuadrada de " + numRaiz + " es: " + raiz);
                 }
-            } else if (opcion == 7) {
-                System.out.println("Gracias por usar nuestro servicios...");
-                System.out.println("Vuelve Pronto...");
-            } else {
-                System.out.println("Error:");
-                System.out.println("Opcion invalida...");
-                System.out.println("Intente de nuevo...");
-
+            }else if (opcion == 7) {
+                ConsolaUI.mostrarMensaje("Gracias por usar nuestros servicios...\n" +
+                                                  "Vuelve Pronto...");
+               
+            }else{
+                ConsolaUI.mostrarMensaje("Error:\n" +
+                                         "Opción inválida...\n" +
+                                         "Intente de nuevo...");
             }
-
-        }
-
-        datos.close();
-
     }
+
+    datos.close();
+ }
 }
